@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PostCard Administration</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Все открытки</h1>
+    </div>
+
+    <?php
+    if(count($tickets) > 0):
+    ?>
+
+    <div class="row">
+        <div class="col-md-14">
+
+            <table class="table table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ссылка</th>
+                    <th>Наименование категории</th>
+                    <th>Наименование</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                    foreach($tickets as $ticket): ?>
+
+                     <tr>
+                         <td>
+                             <a href="/postcard?productId=<?=$ticket->getId() ?>" target="_blank">
+                                 <?=$ticket->getId() ?>
+                             </a>
+                         </td>
+                        <td>
+                            <a href="<?=$ticket->getLink() ?>" target="_blank">
+                                <?=$ticket->getLink() ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?=$ticket->getCatName() ?>
+                        </td>
+                        <td>
+                            <?=$ticket->getName() ?>
+                        </td>
+                        <td>
+                            <?=$ticket->getStatus() ?>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <?php else: ?>
+    <p>Ни одной ссылки еще не создано</p>
+    <?php endif; ?>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -32,31 +32,22 @@ if($ticket->getPhoto()==1){
             width: 250px;
         }
         #page-preloader {
-             /*position: fixed;*/
-             /*left: 0;*/
-             /*top: 0;*/
-             /*right: 0;*/
-             /*bottom: 0;*/
-             /*background: #000;*/
-             /*z-index: 100500;*/
-
-            background: #FFF;
             height: 100%;
             width: 100%;
-            opacity: 0.7;
-            filter: alpha(Opacity=40);
+            /*opacity: 0.7;*/
+            /*filter: alpha(Opacity=40);*/
             position: absolute;
             z-index: 100;
             top: 0;
             left: 0;
          }
         #page-preloader .spinner {
-            width: 81px;
-            height: 81px;
+            width: 160px;
+            height: 24px;
             position: absolute;
-            left: 48%;
-            top: 45%;
-            background: url('/images/2.gif') no-repeat 50% 50%;
+            left: 45%;
+            top: 50%;
+            background: url('/images/76.gif') no-repeat 50% 50%;
             margin: -16px 0 0 -16px;
         }
     </style>
@@ -124,6 +115,7 @@ if($ticket->getPhoto()==1){
         $text.append(img);
     }
     function SaveDesign() {
+
         var saveString = 'pid=' + $(".selectedProduct").attr('id');
 
         $(".photoArea").each(function (cx, e) {
@@ -140,13 +132,13 @@ if($ticket->getPhoto()==1){
     }
     function manipulateCanvasFunction(savedMap) {
         dataURL = savedMap.toDataURL("image/jpeg");
-        productId = $(".selectedProduct").attr('id');
+        productId = '<?=$_GET['productId']?>';
+        customerId = '<?=$_GET['customerId']?>';
         dataURL = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-        $.post("/saveMap", { savedMap: dataURL, productId: productId }, function(data) {
+        $.post("/saveMap", { savedMap: dataURL, productId: productId, customerId: customerId }, function(data) {
             $('#page-preloader').find('.spinner').fadeOut();
             $('#page-preloader').delay(350).fadeOut('slow');
             alert('Изображение сохранено! Выберите количество и нажмите кнопку добавить в корзину');
-            parent.document.getElementById('go-back-href').click();
 
         });
     }

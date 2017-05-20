@@ -108,11 +108,12 @@ $app->post('/saveMap', function (Request $request, Response $response) {
     define('UPLOAD_DIR', 'uploads/');
     $savedMap = $data['savedMap'];
     $productId = $data['productId'];
+    $customerId = $data['customerId'];
     $savedMap = str_replace('data:image/png;base64,', '', $savedMap);
     $savedMap = str_replace(' ', '+', $savedMap);
     $data = base64_decode($savedMap);
     $unique = substr(uniqid(rand(), true), 4, 4);
-    $file = UPLOAD_DIR . $productId . '-'. $unique . '.jpeg';
+    $file = UPLOAD_DIR . $productId . '_'. $customerId . '.jpeg';
     $success = file_put_contents($file, $data);
     print $success ? $file : 'Unable to save the file.';
 

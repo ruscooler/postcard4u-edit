@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 if(isset($_GET['photo'])){
     $photo_exists = true;
 } else {

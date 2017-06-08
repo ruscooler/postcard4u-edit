@@ -15,6 +15,7 @@ $config['db']['host']   = DB_HOST;
 $config['db']['user']   = DB_USER;
 $config['db']['pass']   = DB_PASS;
 $config['db']['dbname'] = DB_NAME;
+$config['db']['charset'] = 'utf8';
 
 
 $app = new \Slim\App(["settings" => $config]);

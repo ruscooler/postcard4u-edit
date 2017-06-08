@@ -1,10 +1,5 @@
 <?php
-if($ticket->getPhoto()==1){
-    $photo_exists = true;
-} else {
-    $photo_exists = false;
-}
-
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -90,7 +85,6 @@ if($ticket->getPhoto()==1){
 
         $('.productText').each(function () {
             $(this).data('oldVal', $(this).val());
-
             $(this).bind("propertychange keyup input paste", function (event) {
                 if ($(this).data('oldVal') != $(this).val()) {
                     $(this).data('oldVal', $(this).val());
@@ -108,10 +102,14 @@ if($ticket->getPhoto()==1){
     function UpdateText(ptlId, w, h) {
         $tb = $("#tb_" + ptlId);
         $text = $("#txt_" + ptlId);
+        var text_color = $text.data('color');
+        if (text_color == '0') {
+            text_color = '000000';
+        }
         $text.html('');
-
         var img = $('<img class="textImg" id="timg_' + ptlId + '">'); //Equivalent: $(document.createElement('img'))
-        img.attr('src', "http://www.theprintingbox.com/FontTest/lineGenerator.aspx?line=" + encodeURIComponent($tb.val()) + "&font=" + $text.data('font') + "&size=" + $text.data('size') + "&align=" + $text.data('align') +"&color=" + $text.data('color') + "&width=" + w + "&height=" + h);
+
+        img.attr('src', "http://www.theprintingbox.com/FontTest/lineGenerator.aspx?line=" + encodeURIComponent($tb.val()) + "&font=" + $text.data('font') + "&size=" + $text.data('size') + "&align=" + $text.data('align') +"&color=" + text_color + "&width=" + w + "&height=" + h);
         $text.append(img);
     }
     function SaveDesign() {
